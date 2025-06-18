@@ -19,15 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarTablaPinturas();
 
     const formulario = document.querySelector('form');
-    formulario.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
-        if (nombreCuadro) {
-            await agregarPinturaEntregada(nombreCuadro);
-            await renderizarTablaPinturas();
-        }
-        formulario.reset();
-    });
+    if (formulario) {
+        formulario.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
+            if (nombreCuadro) {
+                await agregarPinturaEntregada(nombreCuadro);
+                await renderizarTablaPinturas();
+            }
+            formulario.reset();
+        });
+    }
 });
 
 (function ($) {
