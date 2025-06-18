@@ -1,0 +1,400 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top">
+    <div class="container sm:px-4 lg:px-8 flex flex-wrap items-center justify-between lg:flex-nowrap">
+
+      <!-- Text Logo - Use this if you don't have a graphic logo -->
+      <!-- <a class="text-gray-800 font-semibold text-3xl leading-4 no-underline page-scroll" href="index.html">Pavo</a> -->
+
+      <!-- Image Logo -->
+      <a class="inline-block mr-4 py-0.5 text-xl whitespace-nowrap hover:no-underline focus:no-underline"
+        href="index.html">
+        <img src="images/yumiLogoPage.png" alt="alternative" class="h-8" />
+      </a>
+
+      <button
+        class="background-transparent rounded text-xl leading-none hover:no-underline focus:no-underline lg:hidden lg:text-gray-400"
+        type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon inline-block w-8 h-8 align-middle"></span>
+      </button>
+
+      <div class="navbar-collapse offcanvas-collapse lg:flex lg:flex-grow lg:items-center" id="navbarsExampleDefault">
+        <ul class="pl-0 mt-3 mb-2 ml-auto flex flex-col list-none lg:mt-0 lg:mb-0 lg:flex-row">
+          <li>
+            <a class="nav-link page-scroll active" href="#header">Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li>
+            <a class="nav-link page-scroll" href="#galeria">Galerí­a</a>
+          </li>
+          <li>
+            <a class="nav-link page-scroll" href="#sobre-el-artista">Sobre mí</a>
+          </li>
+          <li>
+            <a class="nav-link page-scroll" href="#encarga-tu-cuadro">Encargar un cuadro</a>
+          </li>
+          <li>
+            <a class="nav-link page-scroll" href="#testimonios">Testimonios</a>
+          </li>
+        </ul>
+        <span class="block lg:ml-3.5">
+          <a class="no-underline" href="https://www.instagram.com/yumisarts_/">
+            <i
+              class="fab fa-instagram text-indigo-600 hover:text-pink-500 text-xl transition-all duration-200 mr-1.5"></i>
+          </a>
+
+        </span>
+      </div> <!-- end of navbar-collapse -->
+    </div> <!-- end of container -->
+  </nav> <!-- end of navbar -->
+  <!-- end of navigation -->
+
+  <!-- Header -->
+  <header id="header" class="header py-28 text-center md:pt-36 lg:text-left xl:pt-44 xl:pb-32">
+    <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8 items-center h-full">
+      <!-- Columna izquierda: logo + texto -->
+      <div class="mb-16 flex flex-col items-center justify-center h-full">
+        <!-- Logo  centrado -->
+        <img src="images/yumiLogo.jpg" alt="logo" class="rounded-full object-cover mb-4 mx-auto"
+          style="width:90px; height:90px;" />
+        <!-- Texto y botones debajo del logo -->
+        <div class="text-center">
+          <h1 class="font-bold text-2xl md:text-3xl mb-3">Arte personalizado hecho para ti</h1>
+          <p class="text-sm md:text-base mb-5">Transforma tus ideas o recuerdos en obras únicas, pintadas a
+            mano con dedicación. Haz tu pedido o explora la galería..</p>
+          <a class="btn-solid-lg" href="https://ig.me/m/yumisarts_"><i class="fas fa-shopping-cart"></i>
+            Encargar ahora</a>
+          <a class="btn-solid-lg secondary" href="#galeria"><i class="fas fa-images"></i> Ver galería</a>
+        </div>
+      </div>
+      <!-- Columna derecha: imagen del gato (no se toca) -->
+      <figure>
+        <img src="images/gato.png" alt="Cuadro decorativo" class="mx-auto" />
+        <figcaption class="text-center mt-2">Imagen por <a
+            href="https://www.walmart.com.mx/ip/decoracion-tapetes-y-cojines/cuadros-decorativos-diy-pintura-por-numero-kit-gato-animal-pintura-acrilica-oficina-arte-artesania-ornamento-regalo-ehuebsd-nuevos-originales/00137330348654"
+            target="_blank">Walmart</a></figcaption>
+      </figure>
+    </div> <!-- end of container -->
+  </header> <!-- end of header -->
+  <!-- end of header -->
+  <!-- Details 2 -->
+  <section id="sobre-el-artista" class="my-12 px-6 max-w-5xl mx-auto bg-white rounded shadow-md p-8">
+    <div style="height: 70px;"></div>
+    <h2 class="text-3xl font-bold mb-6 text-center">Sobre el Artista</h2>
+    <div class="flex flex-col md:flex-row items-center">
+      <!-- Izquierda: Foto y texto -->
+      <div class="md:w-2/3 flex flex-col md:flex-row items-center">
+        <!-- Foto del artista -->
+        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center md:pl-6">
+          <img src="images/perfil.JPG" alt="Foto del artista" class="rounded-full w-48 h-48 object-cover shadow-lg" />
+        </div>
+        <!-- Texto aún más desplazado a la derecha y justificado -->
+        <div class="md:w-2/3 pl-4 md:pl-16 text-gray-700 text-lg leading-relaxed text-justify">
+          <p>
+            Soy una apasionada pintora con más de 13 años de experiencia, especializada
+            en retratos y arte contemporáneo. Mi trabajo se caracteriza por la utilización de los acrílicos
+            para recrear
+            ideas y recuerdos con detalles únicos que capturan emociones profundas.
+          </p>
+          <p class="mt-4">
+            A través de mis cuadros, busco contar historias que conecten con las personas, transformando
+            espacios y momentos en experiencias visuales memorables.
+          </p>
+          <p class="mt-4">
+            Si deseas conocer más sobre mi trayectoria o realizar un encargo personalizado, no dudes en
+            contactarme.
+          </p>
+        </div>
+      </div>
+
+      <!-- Derecha: GIF -->
+      <div class="md:w-1/3 flex justify-center mt-6 md:mt-0">
+        <img src="images/vuelta.gif" alt="GIF del artista" class="w-48 h-48 object-contain" />
+      </div>
+    </div>
+  </section>
+
+
+  <section id="encarga-tu-cuadro" class="my-12 px-6 max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row md:space-x-10 items-center justify-center">
+
+      <!-- Lado izquierdo: título + formulario -->
+
+      <div class="md:w-1/2 w-full">
+
+
+        <div style="height: 70px;"></div>
+        <h2 class="text-3xl font-bold mb-6">Encarga tu Cuadro</h2>
+        <form class="bg-white p-6 rounded shadow-md">
+          <div class="mb-4">
+            <label for="nombre" class="block text-gray-700 mb-2">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required>
+          </div>
+          <div class="mb-4">
+            <label for="correo" class="block text-gray-700 mb-2">Correo electrónico</label>
+            <input type="email" id="correo" name="correo"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required>
+          </div>
+          <div class="mb-4">
+            <label for="telefono" class="block text-gray-700 mb-2">Número de celular</label>
+            <input type="tel" id="telefono" name="telefono"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required>
+          </div>
+          <div class="mb-6">
+            <label for="tipo-cuadro" class="block mb-1 font-medium">Tipo de cuadro (descripción)</label>
+            <textarea id="tipo-cuadro" name="tipo-cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
+              placeholder="Describe el cuadro que quieres" required></textarea>
+          </div>
+          <button type="submit"
+            class="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition">Enviar</button>
+        </form>
+      </div>
+
+      <!-- GIF a la derecha -->
+      <div class="gif">
+        <img src="images/pintar.gif" alt="GIF personalizado" />
+      </div>
+    </div>
+  </section>
+  <!-- Counter -->
+  <section id="counter">
+    <div class="counter-grid">
+      <div class="cell">
+        <div id="contador-entregados" class="counter-value">0</div>
+        <p class="counter-info">Cuadros Entregados</p>
+      </div>
+      <div class="cell">
+        <div id="contador-enProceso" class="counter-value">0</div>
+        <p class="counter-info">Cuadros en Proceso</p>
+      </div>
+      <div class="cell">
+        <div id="contador-enEspera" class="counter-value">0</div>
+        <p class="counter-info">Cuadros en Espera</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Testimonios y Reseñas -->
+  <div class="slider-1 py-32 bg-gray" id="testimonios">
+    <div class="container px-4 sm:px-8">
+      <h2 class="mb-12 text-center lg:max-w-xl lg:mx-auto">Testimonios y Reseñas</h2>
+
+      <!-- Card Slider -->
+      <div class="slider-container">
+        <div class="swiper-container card-slider">
+          <div class="swiper-wrapper">
+
+            <!-- Slide -->
+            <div class="swiper-slide">
+              <div class="card">
+                <img class="card-image" src="images/testimonial-1.jpg" alt="Foto de usuario" />
+                <div class="card-body">
+                  <p class="italic mb-3">"La aplicación me ha ayudado a organizar mejor mi
+                    equipo y
+                    aumentar la productividad. ¡Muy recomendada!"</p>
+                  <p class="testimonial-author">María López - Gerente de Proyectos</p>
+                </div>
+              </div>
+            </div>
+            <!-- end of swiper-slide -->
+
+            <!-- Slide -->
+            <div class="swiper-slide">
+              <div class="card">
+                <img class="card-image" src="images/testimonial-2.jpg" alt="Foto de usuario" />
+                <div class="card-body">
+                  <p class="italic mb-3">"Excelente herramienta, fácil de usar y con muchas
+                    funciones
+                    útiles para el trabajo diario."</p>
+                  <p class="testimonial-author">Carlos Pérez - Desarrollador</p>
+                </div>
+              </div>
+            </div>
+            <!-- end of swiper-slide -->
+
+            <!-- Slide -->
+            <div class="swiper-slide">
+              <div class="card">
+                <img class="card-image" src="images/testimonial-3.jpg" alt="Foto de usuario" />
+                <div class="card-body">
+                  <p class="italic mb-3">"Gracias a esta app, la comunicación en mi equipo ha
+                    mejorado
+                    notablemente."</p>
+                  <p class="testimonial-author">Ana Torres - Marketing</p>
+                </div>
+              </div>
+            </div>
+            <!-- end of swiper-slide -->
+
+          </div> <!-- end of swiper-wrapper -->
+
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <!-- end of add arrows -->
+
+        </div> <!-- end of swiper-container -->
+      </div> <!-- end of slider-container -->
+      <!-- end of card slider -->
+
+    </div> <!-- end of container -->
+  </div> <!-- end of slider-1 -->
+  <!-- end of testimonials -->
+  <!-- end of statistics -->
+
+  <!-- Galeria -->
+  <section id="galeria">
+    <div>
+      <div class="container px-4 sm:px-8 xl:px-4">
+        <div style="height: 60px;"></div>
+        <h2 class="mb-4 mt-8 text-center lg:max-w-xl lg:mx-auto">Galería</h2>
+        <div class="cards-1">
+          <!-- Card -->
+          <div class="card-img">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="images/cuadro1.JPG" alt="Cuadro 1" />
+              </div>
+              <div class="card-back">
+                <p class="description">Recreación artística de un árbol de flores rosadas, inspirado
+                  en los
+                  recuerdos de infancia de nuestro cliente. Este cuadro fue pintado a mano para
+                  traer la
+                  serenidad y la belleza de ese paisaje a su nuevo hogar, creando un ambiente
+                  fresco y
+                  acogedor.</p>
+              </div>
+            </div>
+          </div>
+          <!-- end of card -->
+          <!-- Card -->
+          <div class="card-img">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="images/cuadro2.JPG" alt="Cuadro 2" />
+              </div>
+              <div class="card-back">
+                <p class="description">Esta pintura fue encargada por un fan del popular anime
+                  Toilet-bound
+                  Hanako-kun. El cliente deseaba tener una representación única de su personaje
+                  favorito,
+                  Hanako, para capturar la esencia y la personalidad que tanto le atraen. Una
+                  pieza que
+                  combina el amor por el anime con el arte tradicional.</p>
+              </div>
+            </div>
+          </div>
+          <!-- end of card -->
+          <!-- Card -->
+          <div class="card-img">
+            <div class="card-inner">
+              <div class="card-front">
+                <img src="images/cuadro3.JPG" alt="Cuadro 3" />
+              </div>
+              <div class="card-back">
+                <p class="description">Pintura realizada en honor a Morita, una perrita que fue
+                  parte
+                  fundamental de la familia durante muchos años. Esta obra busca preservar su
+                  recuerdo y
+                  el amor incondicional que brindó a su hogar. Un homenaje a su memoria que
+                  perdurará en
+                  el tiempo.</p>
+              </div>
+            </div>
+          </div>
+          <!-- end of card -->
+
+        </div> <!-- end of container -->
+      </div> <!-- end of cards-1 -->
+    </div> <!-- end of features -->
+  </section>
+
+
+
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="container px-4 sm:px-8">
+      <h4 class="mb-8 lg:max-w-3xl lg:mx-auto">
+        Conéctate conmigo en Instagram y descubre nuestras últimas creaciones. ¡Síguenos para estar al
+        día!
+      </h4>
+      <div class="social-container">
+        <span class="fa-stack">
+          <a href="https://www.facebook.com/hilda.victoria.92798">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-facebook-f fa-stack-1x"></i>
+          </a>
+        </span>
+        <span class="fa-stack">
+          <a href="https://x.com/vsxpe_28">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-twitter fa-stack-1x"></i>
+          </a>
+        </span>
+
+        <span class="fa-stack">
+          <a href="https://ig.me/m/yumisarts_" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-instagram fa-stack-1x"></i>
+          </a>
+        </span>
+
+      </div> <!-- end of social-container -->
+    </div> <!-- end of container -->
+  </div> <!-- end of footer -->
+
+
+
+  <!-- Copyright -->
+  <div class="copyright bg-gray-800 text-gray-400 py-6">
+    <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-3 max-w-5xl mx-auto text-center lg:text-left">
+
+      <p class="pb-2 p-small statement">Copyright © Hilda Angulo</a></p>
+      <p class="pb-2 p-small statement text-center lg:text-right">Distribuido por: <a href="https://themewagon.com/"
+          class="no-underline hover:text-white" target="_blank" rel="noopener">Themewagon</a></p>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/jquery.magnific-popup.js"></script>
+  <script src="js/scripts.js"></script>
+
+  <!-- Inicializa Swiper -->
+  <script>
+    var swiper = new Swiper('.card-slider', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  </script>
+
+
+</body>
+
+</html>
