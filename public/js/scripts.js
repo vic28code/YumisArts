@@ -268,7 +268,7 @@ import { obtenerPinturasEntregadas, agregarPinturaEntregada } from './DataBase.j
 		const formulario = document.querySelector('form');
 		if (formulario) {
 			formulario.addEventListener('submit', async function(e) {
-				e.preventDefault();
+				e.preventDefault(); // Esto previene el refresco
 				const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
 				if (nombreCuadro) {
 					await agregarPinturaEntregada(nombreCuadro);
