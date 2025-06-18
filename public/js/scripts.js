@@ -2,6 +2,8 @@
    Description: Custom JS file
 */
 
+import { obtenerPinturasEntregadas, agregarPinturaEntregada } from './DataBase.js';
+
 (function ($) {
 	"use strict";
 
@@ -245,7 +247,37 @@
 		// Ejecutar procesamiento cada 1 minuto (60000 ms)
 		setInterval(procesarCuadros, 60000);
 	});
-	
+
+	/* Función para renderizar la tabla de nombres de pinturas entregadas */
+	async function renderizarTablaPinturas() {
+		const lista = await obtenerPinturasEntregadas();
+		const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
+		if (!tbody) return;
+		tbody.innerHTML = '';
+		lista.forEach(nombre => {
+			const tr = document.createElement('tr');
+			tr.innerHTML = `<td>${nombre}</td>`;
+			tbody.appendChild(tr);
+		});
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		renderizarTablaPinturas();
+
+		// Selecciona el formulario (ajusta el selector si es necesario)
+		const formulario = document.querySelector('form');
+		if (formulario) {
+			formulario.addEventListener('submit', async function(e) {
+				e.preventDefault();
+				const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
+				if (nombreCuadro) {
+					await agregarPinturaEntregada(nombreCuadro);
+					await renderizarTablaPinturas();
+				}
+				formulario.reset();
+			});
+		}
+	});
 
 })(jQuery);
 
