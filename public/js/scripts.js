@@ -18,20 +18,42 @@ async function renderizarTablaPinturas() {
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTablaPinturas();
 
+    // Cargar contadores o inicializar en 0
+    let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
+    let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
+    let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
+
+    function actualizarContadores() {
+        document.getElementById('contador-entregados').textContent = entregados;
+        document.getElementById('contador-enProceso').textContent = enProceso;
+        document.getElementById('contador-enEspera').textContent = enEspera;
+    }
+
+    actualizarContadores();
+
     const formulario = document.querySelector('form');
     if (formulario) {
         formulario.addEventListener('submit', async function(e) {
             e.preventDefault();
             const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
             if (nombreCuadro) {
+                // Si quieres guardar en localStorage:
+                localStorage.setItem('ultimoNombrePintura', nombreCuadro);
+                enEspera++;
+                localStorage.setItem('contadorEnEspera', enEspera);
+                actualizarContadores();
+
+                // Si quieres guardar en Firebase:
                 await agregarPinturaEntregada(nombreCuadro);
                 await renderizarTablaPinturas();
             }
             formulario.reset();
+            formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
         });
     }
 });
 
+/* El resto de tu código jQuery y scripts puede ir aquí, pero NO agregues otro listener al submit del formulario */
 (function ($) {
 	"use strict";
 
@@ -230,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
 		let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
 
-		// Función para mostrar valores en la página
 		function actualizarContadores() {
 			document.getElementById('contador-entregados').textContent = entregados;
 			document.getElementById('contador-enProceso').textContent = enProceso;
@@ -239,20 +260,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		actualizarContadores();
 
-		// Manejar envío del formulario
 		const formulario = document.querySelector('form');
 		if (formulario) {
 			formulario.addEventListener('submit', (e) => {
 				e.preventDefault();
-
-				// Sumar uno a cuadros en espera
-				enEspera++;
-				localStorage.setItem('contadorEnEspera', enEspera);
-				actualizarContadores();
-
-				// Limpiar formulario y clases no vacías
-				formulario.reset();
-				formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
+				const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
+				if (nombreCuadro) {
+					localStorage.setItem('ultimoNombrePintura', nombreCuadro);
+					enEspera++;
+					localStorage.setItem('contadorEnEspera', enEspera);
+					actualizarContadores();
+					formulario.reset();
+					formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
+				}
 			});
 		}
 
