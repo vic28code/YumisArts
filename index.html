@@ -1,40 +1,64 @@
 <!doctype html>
-<html>
+<html class="dark">
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
- <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Pavo is a mobile app Tailwind CSS HTML template created to help you present benefits, features and information about mobile apps in order to convince visitors to download them" />
-    <meta name="author" content="Victoria and Paul" />
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Pavo is a mobile app Tailwind CSS HTML template created to help you present benefits, features and information about mobile apps in order to convince visitors to download them" />
+  <meta name="author" content="Victoria and Paul" />
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Pavo is a mobile app Tailwind CSS HTML template created to help you present benefits, features and information about mobile apps in order to convince visitors to download them" />
+  <meta name="author" content="Victoria and Paul" />
 
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-    <meta property="og:site_name" content="" /> <!-- website name -->
-    <meta property="og:site" content="" /> <!-- website link -->
-    <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-    <meta name="twitter:card" content="summary_large_image" /> <!-- to have large image post format in Twitter -->
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+  <meta property="og:site_name" content="" /> <!-- website name -->
+  <meta property="og:site" content="" /> <!-- website link -->
+  <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+  <meta name="twitter:card" content="summary_large_image" /> <!-- to have large image post format in Twitter -->
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+  <meta property="og:site_name" content="" /> <!-- website name -->
+  <meta property="og:site" content="" /> <!-- website link -->
+  <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+  <meta name="twitter:card" content="summary_large_image" /> <!-- to have large image post format in Twitter -->
 
-    <!-- Webpage Title -->
-    <title>Yumi's Art</title>
+  <!-- Webpage Title -->
+  <title>Yumi's Art</title>
+  <!-- Webpage Title -->
+  <title>Yumi's Art</title>
 
-    <!-- Styles -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet" />
-    <link href="css/fontawesome-all.css" rel="stylesheet" />
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
-    <link href="css/swiper.css" rel="stylesheet" />
-    <link href="css/magnific-popup.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="css/fontawesome-all.css" rel="stylesheet" />
+  <link href="css/swiper.css" rel="stylesheet" />
+  <link href="css/magnific-popup.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="css/fontawesome-all.css" rel="stylesheet" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="css/swiper.css" rel="stylesheet" />
+  <link href="css/magnific-popup.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
 
-    <!-- Favicon  -->
-    <link rel="icon" href="/public/images/logo.png" />
+  <!-- Favicon  -->
+  <link rel="icon" href="/images/logo.png" />
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -184,6 +208,11 @@
               required>
           </div>
           <div class="mb-6">
+            <label for="nombre_cuadro" class="block text-gray-700 mb-2">Nombre del cuadro</label>
+            <textarea id="nombre_cuadro" name="nombre_cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
+              placeholder="Escribe el nombre del cuadro" required></textarea>
+          </div>
+          <div class="mb-6">
             <label for="tipo-cuadro" class="block mb-1 font-medium">Tipo de cuadro (descripción)</label>
             <textarea id="tipo-cuadro" name="tipo-cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
               placeholder="Describe el cuadro que quieres" required></textarea>
@@ -196,6 +225,16 @@
           <button type="submit"
             class="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition">Enviar</button>
         </form>
+
+        <!-- Tabla de pinturas entregadas -->
+        <div id="pinturas-entregadas-container" class="mt-8">
+          <h4 class="text-lg font-semibold mb-2">Nombres de pinturas entregadas</h4>
+          <table id="tabla-pinturas-entregadas" class="w-full border text-center">
+            <tbody>
+              <!-- Aquí se mostrarán los nombres -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- GIF a la derecha -->
@@ -205,19 +244,21 @@
     </div>
   </section>
   <!-- Counter -->
-  <section id="counter">
-    <div class="counter-grid">
-      <div class="cell">
-        <div id="contador-entregados" class="counter-value">0</div>
-        <p class="counter-info">Cuadros Entregados</p>
-      </div>
-      <div class="cell">
-        <div id="contador-enProceso" class="counter-value">0</div>
-        <p class="counter-info">Cuadros en Proceso</p>
-      </div>
-      <div class="cell">
-        <div id="contador-enEspera" class="counter-value">0</div>
-        <p class="counter-info">Cuadros en Espera</p>
+  <section id="counter" class="my-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div class="bg-white dark:bg-gray-900 rounded shadow p-6 flex flex-col items-center">
+          <div id="contador-entregados" class="text-4xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">0</div>
+          <p class="text-gray-700 dark:text-gray-200">Cuadros Entregados</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded shadow p-6 flex flex-col items-center">
+          <div id="contador-enProceso" class="text-4xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">0</div>
+          <p class="text-gray-700 dark:text-gray-200">Cuadros en Proceso</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 rounded shadow p-6 flex flex-col items-center">
+          <div id="contador-enEspera" class="text-4xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">0</div>
+          <p class="text-gray-700 dark:text-gray-200">Cuadros en Espera</p>
+        </div>
       </div>
     </div>
   </section>
@@ -238,12 +279,11 @@
             <!-- Slide -->
             <div class="swiper-slide">
               <div class="card">
-                <img class="card-image" src="images/testimonial-1.jpg" alt="Foto de usuario" />
+                <img class="card-image" src="images/ale.jpg" alt="Foto de usuario 1" />
                 <div class="card-body">
-                  <p class="italic mb-3">"La aplicación me ha ayudado a organizar mejor mi
-                    equipo y
-                    aumentar la productividad. ¡Muy recomendada!"</p>
-                  <p class="testimonial-author">María López - Gerente de Proyectos</p>
+                  <p class="italic mb-3">"100% recomendado. Excelente atención y un talento increíble. Volveré a
+                    encargar otra obra."</p>
+                  <p class="testimonial-author">Alejandro Sornoza - Cliente Frecuente</p>
                 </div>
               </div>
             </div>
@@ -252,12 +292,11 @@
             <!-- Slide -->
             <div class="swiper-slide">
               <div class="card">
-                <img class="card-image" src="images/testimonial-2.jpg" alt="Foto de usuario" />
+                <img class="card-image" src="images/pol.jpg" alt="Foto de usuario 2" />
                 <div class="card-body">
-                  <p class="italic mb-3">"Excelente herramienta, fácil de usar y con muchas
-                    funciones
-                    útiles para el trabajo diario."</p>
-                  <p class="testimonial-author">Carlos Pérez - Desarrollador</p>
+                  <p class="italic mb-3">"La pintura que encargué superó mis expectativas. Ahora cada vez que la veo, me
+                    emociona."</p>
+                  <p class="testimonial-author">Paul Alcívar</p>
                 </div>
               </div>
             </div>
@@ -414,7 +453,7 @@
   <script src="/js/swiper.min.js"></script>
   <script src="/js/jquery.magnific-popup.js"></script>
   <script type="module" src="/js/scripts.js"></script>
-  
+
 </body>
 
 </html>
