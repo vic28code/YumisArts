@@ -53,12 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* El resto de tu código jQuery y scripts puede ir aquí, pero NO agregues otro listener al submit del formulario */
 (function ($) {
 	"use strict";
-
-	/* Navbar Scripts */
-	// jQuery to collapse the navbar on scroll
 	$(window).on('scroll load', function () {
 		if ($(".navbar").offset().top > 60) {
 			$(".fixed-top").addClass("top-nav-collapse");
