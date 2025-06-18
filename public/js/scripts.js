@@ -1,24 +1,57 @@
 /* Template: Pavo Mobile App Website Tailwind CSS HTML Template
    Description: Custom JS file
 */
+const firebaseConfig = {
+    apiKey: "AIzaSyBHnihjo2df71IsWSiW-t44Djuxh4l_tRY",
+    authDomain: "pintura2-36966.firebaseapp.com",
+    projectId: "pintura2-36966",
+    storageBucket: "pintura2-36966.firebasestorage.app",
+    messagingSenderId: "496399802898",
+    appId: "1:496399802898:web:198868bd05ad6570e5eecb"
+};
 
-import { obtenerPinturasEntregadas, agregarPinturaEntregada } from './DataBase.js';
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
+// Función para agregar una pintura entregada
+async function agregarPinturaEntregada(nombre) {
+    await db.collection("pinturasEntregadas").add({
+        nombre: nombre,
+        fecha: new Date()
+    });
+}
+
+// Función para obtener las últimas 5 pinturas entregadas
+async function obtenerPinturasEntregadas() {
+    const querySnapshot = await db.collection("pinturasEntregadas")
+        .orderBy("fecha", "desc")
+        .limit(5)
+        .get();
+    const lista = [];
+    querySnapshot.forEach((doc) => {
+        lista.push(doc.data().nombre);
+    });
+    return lista;
+}
+// --- FIN: Configuración y funciones de Firebase ---
+
+// Función para renderizar la tabla de pinturas entregadas
 async function renderizarTablaPinturas() {
     const lista = await obtenerPinturasEntregadas();
     const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
-    tbody.innerHTML = '';
-    lista.forEach(nombre => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${nombre}</td>`;
-        tbody.appendChild(tr);
-    });
+    if (tbody) {
+        tbody.innerHTML = '';
+        lista.slice(-5).forEach(nombre => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${nombre}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTablaPinturas();
 
-    // Cargar contadores o inicializar en 0
     let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
     let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
     let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
@@ -31,21 +64,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     actualizarContadores();
 
-    const formulario = document.querySelector('form');
+    // Solo guarda en la base de datos cuando pasa de "en proceso" a "entregado"
+    function procesarCuadros() {
+        if (enEspera > 0) {
+            enEspera--;
+            enProceso++;
+        } else if (enProceso > 0) {
+            enProceso--;
+            entregados++;
+            const nombre = localStorage.getItem('ultimoNombrePintura');
+            if (nombre) {
+                agregarPinturaEntregada(nombre); // Solo aquí se guarda en la base de datos
+                renderizarTablaPinturas();
+                localStorage.removeItem('ultimoNombrePintura');
+            }
+        }
+
+        localStorage.setItem('contadorEnEspera', enEspera);
+        localStorage.setItem('contadorEnProceso', enProceso);
+        localStorage.setItem('contadorEntregados', entregados);
+        actualizarContadores();
+    }
+
+    setInterval(procesarCuadros, 60000);
+
+    // En el submit, solo actualiza los contadores y guarda el nombre en localStorage
+    const formulario = document.querySelector('#encarga-tu-cuadro form');
     if (formulario) {
-        formulario.addEventListener('submit', async function(e) {
+        formulario.addEventListener('submit', function(e) {
             e.preventDefault();
             const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
             if (nombreCuadro) {
-                // Si quieres guardar en localStorage:
                 localStorage.setItem('ultimoNombrePintura', nombreCuadro);
                 enEspera++;
                 localStorage.setItem('contadorEnEspera', enEspera);
                 actualizarContadores();
-
-                // Si quieres guardar en Firebase:
-                await agregarPinturaEntregada(nombreCuadro);
-                await renderizarTablaPinturas();
             }
             formulario.reset();
             formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
@@ -53,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// jQuery y plugins solo si están disponibles
 (function ($) {
 	"use strict";
 	$(window).on('scroll load', function () {
@@ -75,9 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// close menu on click in small viewport
-	$('[data-toggle="offcanvas"], .nav-link:not(.dropdown-toggle').on('click', function () {
+	$('[data-toggle="offcanvas"], .nav-link:not(.dropdown-toggle)').on('click', function () {
 		$('.offcanvas-collapse').toggleClass('open')
-	})
+	});
 
 	// hover in desktop mode
 	function toggleDropdown(e) {
@@ -94,52 +148,51 @@ document.addEventListener('DOMContentLoaded', () => {
 		.on('mouseenter mouseleave', '.dropdown', toggleDropdown)
 		.on('click', '.dropdown-menu a', toggleDropdown);
 
-
 	/* Details Lightbox - Magnific Popup */
-	$('.popup-with-move-anim').magnificPopup({
-		type: 'inline',
-		fixedContentPos: true,
-		fixedBgPos: true,
-		overflowY: 'auto',
-		closeBtnInside: true,
-		preloader: false,
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-slide-bottom'
-	});
-
+	if ($.fn.magnificPopup) {
+		$('.popup-with-move-anim').magnificPopup({
+			type: 'inline',
+			fixedContentPos: true,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-slide-bottom'
+		});
+	}
 
 	/* Card Slider - Swiper */
-	var cardSlider = new Swiper('.card-slider', {
-		autoplay: {
-			delay: 4000,
-			disableOnInteraction: false
-		},
-		loop: true,
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev'
-		},
-		slidesPerView: 3,
-		spaceBetween: 70,
-		breakpoints: {
-			// when window is <= 767px
-			767: {
-				slidesPerView: 1
+	if (typeof Swiper !== 'undefined') {
+		var cardSlider = new Swiper('.card-slider', {
+			autoplay: {
+				delay: 4000,
+				disableOnInteraction: false
 			},
-			// when window is <= 1023px
-			1023: {
-				slidesPerView: 2,
-				spaceBetween: 40
+			loop: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			},
+			slidesPerView: 3,
+			spaceBetween: 70,
+			breakpoints: {
+				767: {
+					slidesPerView: 1
+				},
+				1023: {
+					slidesPerView: 2,
+					spaceBetween: 40
+				}
 			}
-		}
-	});
-
+		});
+	}
 
 	/* Counter - CountTo */
 	var a = 0;
 	$(window).scroll(function () {
-		if ($('#counter').length) { // checking if CountTo section exists in the page, if not it will not run the script and avoid errors	
+		if ($('#counter').length) {
 			var oTop = $('#counter').offset().top - window.innerHeight;
 			if (a == 0 && $(window).scrollTop() > oTop) {
 				$('.counter-value').each(function () {
@@ -158,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
 							},
 							complete: function () {
 								$this.text(this.countNum);
-								//alert('finished');
 							}
 						});
 				});
@@ -167,9 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-
 	/* Move Form Fields Label When User Types */
-	// for input and textarea fields
 	$("input, textarea").keyup(function () {
 		if ($(this).val() != '') {
 			$(this).addClass('notEmpty');
@@ -178,9 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-
 	/* Back To Top Button */
-	// create the back to top button
 	$('body').prepend('<a href="body" class="back-to-top page-scroll">Back to Top</a>');
 	var amountScrolled = 700;
 	$(window).scroll(function () {
@@ -190,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			$('a.back-to-top').fadeOut('500');
 		}
 	});
-
 
 	/* Removes Long Focus On Buttons */
 	$(".button, a, button").mouseup(function () {
@@ -237,79 +284,5 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	}
-	const counters = {
-		entregados: 0,
-		enProceso: 0,
-		enEspera: 0,
-	};
-	document.addEventListener('DOMContentLoaded', () => {
-		// Cargar contadores o inicializar en 0
-		let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
-		let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
-		let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
-
-		function actualizarContadores() {
-			document.getElementById('contador-entregados').textContent = entregados;
-			document.getElementById('contador-enProceso').textContent = enProceso;
-			document.getElementById('contador-enEspera').textContent = enEspera;
-		}
-
-		actualizarContadores();
-
-		const formulario = document.querySelector('form');
-		if (formulario) {
-			formulario.addEventListener('submit', (e) => {
-				e.preventDefault();
-				const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
-				if (nombreCuadro) {
-					localStorage.setItem('ultimoNombrePintura', nombreCuadro);
-					enEspera++;
-					localStorage.setItem('contadorEnEspera', enEspera);
-					actualizarContadores();
-					formulario.reset();
-					formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
-				}
-			});
-		}
-
-		// Función para mover cuadros en espera -> en proceso -> entregados
-		function procesarCuadros() {
-			if (enEspera > 0) {
-				enEspera--;
-				enProceso++;
-			} else if (enProceso > 0) {
-				enProceso--;
-				entregados++;
-				const nombre = localStorage.getItem('ultimoNombrePintura');
-				if (nombre) {
-					agregarPinturaEntregada(nombre);
-					renderizarTablaPinturas();
-					localStorage.removeItem('ultimoNombrePintura');
-				}
-			}
-
-			localStorage.setItem('contadorEnEspera', enEspera);
-			localStorage.setItem('contadorEnProceso', enProceso);
-			localStorage.setItem('contadorEntregados', entregados);
-			actualizarContadores();
-		}
-
-		// Ejecutar procesamiento cada 1 minuto (60000 ms)
-		setInterval(procesarCuadros, 60000);
-
-		function renderizarTablaPinturas() {
-			const lista = obtenerPinturasEntregadas();
-			const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
-			tbody.innerHTML = '';
-			lista.slice(-5).forEach(nombre => {
-				const tr = document.createElement('tr');
-				tr.innerHTML = `<td>${nombre}</td>`;
-				tbody.appendChild(tr);
-			});
-		}
-		renderizarTablaPinturas();
-	});
-	
-
 })(jQuery);
 

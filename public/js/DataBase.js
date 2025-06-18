@@ -4,12 +4,12 @@ import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from
 
 // Configuración de tu proyecto Firebase usando variables de entorno
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyBHnihjo2df71IsWSiW-t44Djuxh4l_tRY",
+  authDomain: "pintura2-36966.firebaseapp.com",
+  projectId: "pintura2-36966",
+  storageBucket: "pintura2-36966.firebasestorage.app",
+  messagingSenderId: "496399802898",
+  appId: "1:496399802898:web:198868bd05ad6570e5eecb"
 };
 
 // Inicializa Firebase y Firestore

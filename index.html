@@ -5,48 +5,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-  <!-- SEO Meta Tags -->
   <meta name="description"
     content="Pavo is a mobile app Tailwind CSS HTML template created to help you present benefits, features and information about mobile apps in order to convince visitors to download them" />
   <meta name="author" content="Victoria and Paul" />
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="Pavo is a mobile app Tailwind CSS HTML template created to help you present benefits, features and information about mobile apps in order to convince visitors to download them" />
-  <meta name="author" content="Victoria and Paul" />
+  <meta property="og:site_name" content="" />
+  <meta property="og:site" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-  <meta property="og:site_name" content="" /> <!-- website name -->
-  <meta property="og:site" content="" /> <!-- website link -->
-  <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
-  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-  <meta name="twitter:card" content="summary_large_image" /> <!-- to have large image post format in Twitter -->
-  <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-  <meta property="og:site_name" content="" /> <!-- website name -->
-  <meta property="og:site" content="" /> <!-- website link -->
-  <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
-  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-  <meta name="twitter:card" content="summary_large_image" /> <!-- to have large image post format in Twitter -->
-
-  <!-- Webpage Title -->
-  <title>Yumi's Art</title>
-  <!-- Webpage Title -->
   <title>Yumi's Art</title>
 
-  <!-- Styles -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-    rel="stylesheet" />
-  <link href="css/fontawesome-all.css" rel="stylesheet" />
-  <link href="css/swiper.css" rel="stylesheet" />
-  <link href="css/magnific-popup.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
   <!-- Styles -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
@@ -57,7 +28,6 @@
   <link href="css/magnific-popup.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
 
-  <!-- Favicon  -->
   <link rel="icon" href="/images/logo.png" />
 </head>
 
@@ -184,8 +154,6 @@
       <!-- Lado izquierdo: título + formulario -->
 
       <div class="md:w-1/2 w-full">
-
-
         <div style="height: 70px;"></div>
         <h2 class="text-3xl font-bold mb-6">Encarga tu Cuadro</h2>
         <form class="bg-white p-6 rounded shadow-md">
@@ -217,11 +185,6 @@
             <textarea id="tipo-cuadro" name="tipo-cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
               placeholder="Describe el cuadro que quieres" required></textarea>
           </div>
-          <div class="mb-6">
-            <label for="nombre_cuadro" class="block text-gray-700 mb-2">Nombre del cuadro</label>
-            <textarea id="nombre_cuadro" name="nombre_cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
-              placeholder="Escribe el nombre del cuadro" required></textarea>
-          </div>
           <button type="submit"
             class="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition">Enviar</button>
         </form>
@@ -243,6 +206,7 @@
       </div>
     </div>
   </section>
+
   <!-- Counter -->
   <section id="counter" class="my-12">
     <div class="max-w-4xl mx-auto px-4">
@@ -448,12 +412,14 @@
 
 
   <!-- Scripts -->
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery.easing.min.js"></script>
-  <script src="/js/swiper.min.js"></script>
-  <script src="/js/jquery.magnific-popup.js"></script>
-  <script type="module" src="/js/scripts.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+  <!-- Firebase App (CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="/js/scripts.js"></script>
 </body>
 
 </html>
