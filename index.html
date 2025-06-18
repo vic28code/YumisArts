@@ -2,6 +2,10 @@
 <html class="dark">>
 
 <head>
+<<<<<<< HEAD
+=======
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+>>>>>>> origin/Pol
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -33,7 +37,11 @@
   <link href="css/styles.css" rel="stylesheet" />
 
   <!-- Favicon  -->
+<<<<<<< HEAD
   <link rel="icon" href="/images/logo.png" />
+=======
+  <link rel="icon" href="/public/images/logo.png" />
+>>>>>>> origin/Pol
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -184,6 +192,11 @@
               required>
           </div>
           <div class="mb-6">
+            <label for="nombre_cuadro" class="block text-gray-700 mb-2">Nombre del cuadro</label>
+            <textarea id="nombre_cuadro" name="nombre_cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
+              placeholder="Escribe el nombre del cuadro" required></textarea>
+          </div>
+          <div class="mb-6">
             <label for="tipo-cuadro" class="block mb-1 font-medium">Tipo de cuadro (descripción)</label>
             <textarea id="tipo-cuadro" name="tipo-cuadro" class="w-full border rounded px-3 py-2 h-32 resize-none"
               placeholder="Describe el cuadro que quieres" required></textarea>
@@ -191,6 +204,16 @@
           <button type="submit"
             class="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition">Enviar</button>
         </form>
+
+        <!-- Tabla de pinturas entregadas -->
+        <div id="pinturas-entregadas-container" class="mt-8">
+          <h4 class="text-lg font-semibold mb-2">Nombres de pinturas entregadas</h4>
+          <table id="tabla-pinturas-entregadas" class="w-full border text-center">
+            <tbody>
+              <!-- Aquí se mostrarán los nombres -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- GIF a la derecha -->
@@ -408,7 +431,10 @@
   <script src="/js/jquery.easing.min.js"></script>
   <script src="/js/swiper.min.js"></script>
   <script src="/js/jquery.magnific-popup.js"></script>
-  <script src="/js/scripts.js"></script>
+  <script type="module" src="js/scripts.js"></script>
+  <script type="module">
+    import { obtenerPinturasEntregadas, agregarPinturaEntregada } from './DataBase.js';
+  </script>
 
 </body>
 

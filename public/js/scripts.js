@@ -2,6 +2,34 @@
    Description: Custom JS file
 */
 
+import { obtenerPinturasEntregadas, agregarPinturaEntregada } from './DataBase.js';
+
+async function renderizarTablaPinturas() {
+    const lista = await obtenerPinturasEntregadas();
+    const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
+    tbody.innerHTML = '';
+    lista.forEach(nombre => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${nombre}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarTablaPinturas();
+
+    const formulario = document.querySelector('form');
+    formulario.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
+        if (nombreCuadro) {
+            await agregarPinturaEntregada(nombreCuadro);
+            await renderizarTablaPinturas();
+        }
+        formulario.reset();
+    });
+});
+
 (function ($) {
 	"use strict";
 
@@ -234,6 +262,12 @@
 			} else if (enProceso > 0) {
 				enProceso--;
 				entregados++;
+				const nombre = localStorage.getItem('ultimoNombrePintura');
+				if (nombre) {
+					agregarPinturaEntregada(nombre);
+					renderizarTablaPinturas();
+					localStorage.removeItem('ultimoNombrePintura');
+				}
 			}
 
 			localStorage.setItem('contadorEnEspera', enEspera);
@@ -244,6 +278,18 @@
 
 		// Ejecutar procesamiento cada 1 minuto (60000 ms)
 		setInterval(procesarCuadros, 60000);
+
+		function renderizarTablaPinturas() {
+			const lista = obtenerPinturasEntregadas();
+			const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
+			tbody.innerHTML = '';
+			lista.slice(-5).forEach(nombre => {
+				const tr = document.createElement('tr');
+				tr.innerHTML = `<td>${nombre}</td>`;
+				tbody.appendChild(tr);
+			});
+		}
+		renderizarTablaPinturas();
 	});
 	
 
