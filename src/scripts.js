@@ -5,9 +5,7 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-// If you are using a local file (not recommended), use:
-import './jquery.easing.min.js';
-import './jquery.magnific-popup.js';
+
 import Swiper from 'swiper';
 import { db, collection, addDoc, agregarPinturaEntregada, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
 
