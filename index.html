@@ -219,8 +219,25 @@
     </div>
   </section>
 
-
-
+  <section>
+    <h2 class="text-xl font-bold mb-6 text-center">Últimos encargos</h2>
+    <div class="w-full flex justify-center py-6">
+      <div class="overflow-x-auto w-full max-w-2xl rounded-lg shadow-lg bg-white">
+        <table id="tabla-encargos" class="min-w-full">
+          <thead>
+            <tr class="bg-gradient-to-r from-indigo-500 to-blue-400">
+              <th class="px-6 py-3 text-center text-xs font-bold text-white uppercase tracking-wider rounded-tl-lg">Nombre</th>
+              <th class="px-6 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Descripción</th>
+              <th class="px-6 py-3 text-center text-xs font-bold text-white uppercase tracking-wider rounded-tr-lg">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se llenarán dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
   <!-- Testimonios y Reseñas -->
   <div class="slider-1 py-32 bg-gray" id="testimonios">
@@ -401,14 +418,20 @@
     </div>
   </div>
 
+  <script type="importmap">
+  {
+    "imports": {
+      "swiper": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+      "swiper/element": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element.min.js"
+    }
+  }
+</script>
 
   <!-- Scripts -->
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery.easing.min.js"></script>
-  <script src="/js/swiper.min.js"></script>
-  <script src="/js/jquery.magnific-popup.js"></script>
-  <script src="/js/scripts.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="/src/jquery.easing.min.js"></script>
+  <script src="/src/jquery.magnific-popup.js"></script>
+  <script type="module" src="/src/scripts.js"></script>
 </body>
 
 </html>

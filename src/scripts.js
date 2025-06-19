@@ -1,109 +1,118 @@
 /* Template: Pavo Mobile App Website Tailwind CSS HTML Template
    Description: Custom JS file
 */
-const firebaseConfig = {
-    apiKey: "AIzaSyBHnihjo2df71IsWSiW-t44Djuxh4l_tRY",
-    authDomain: "pintura2-36966.firebaseapp.com",
-    projectId: "pintura2-36966",
-    storageBucket: "pintura2-36966.firebasestorage.app",
-    messagingSenderId: "496399802898",
-    appId: "1:496399802898:web:198868bd05ad6570e5eecb"
-};
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// Función para agregar una pintura entregada
-async function agregarPinturaEntregada(nombre) {
-    await db.collection("pinturasEntregadas").add({
-        nombre: nombre,
-        fecha: new Date()
-    });
-}
-
-// Función para obtener las últimas 5 pinturas entregadas
-async function obtenerPinturasEntregadas() {
-    const querySnapshot = await db.collection("pinturasEntregadas")
-        .orderBy("fecha", "desc")
-        .limit(5)
-        .get();
-    const lista = [];
-    querySnapshot.forEach((doc) => {
-        lista.push(doc.data().nombre);
-    });
-    return lista;
-}
-// --- FIN: Configuración y funciones de Firebase ---
+// If you are using a local file (not recommended), use:
+import './jquery.easing.min.js';
+import './jquery.magnific-popup.js';
+import Swiper from 'swiper';
+import { db, collection, addDoc, agregarPinturaEntregada, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
 
 // Función para renderizar la tabla de pinturas entregadas
 async function renderizarTablaPinturas() {
-    const lista = await obtenerPinturasEntregadas();
-    const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
-    if (tbody) {
-        tbody.innerHTML = '';
-        lista.slice(-5).forEach(nombre => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${nombre}</td>`;
-            tbody.appendChild(tr);
-        });
-    }
+	const lista = await obtenerPinturasEntregadas();
+	const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
+	if (tbody) {
+		tbody.innerHTML = '';
+		lista.slice(-5).forEach(nombre => {
+			const tr = document.createElement('tr');
+			tr.innerHTML = `<td>${nombre}</td>`;
+			tbody.appendChild(tr);
+		});
+	}
+}
+
+// Función para renderizar la tabla de encargos
+async function renderizarTablaEncargos() {
+	const lista = await obtenerUltimosEncargos();
+	const tbody = document.querySelector('#tabla-encargos tbody');
+	if (tbody) {
+		tbody.innerHTML = '';
+		lista.forEach(encargo => {
+			const tr = document.createElement('tr');
+			tr.className = "odd:bg-indigo-50 even:bg-blue-50 hover:bg-indigo-100 text-center";
+			tr.innerHTML = `
+				<td>${encargo.nombre}</td>
+				<td>${encargo.tipoCuadro}</td>
+				<td>${encargo.fecha ? new Date(encargo.fecha).toLocaleString() : ''}</td>
+			`;
+			tbody.appendChild(tr);
+		});
+	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderizarTablaPinturas();
+	renderizarTablaPinturas();
+	renderizarTablaEncargos();
 
-    let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
-    let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
-    let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
+	let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
+	let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
+	let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
 
-    function actualizarContadores() {
-        document.getElementById('contador-entregados').textContent = entregados;
-        document.getElementById('contador-enProceso').textContent = enProceso;
-        document.getElementById('contador-enEspera').textContent = enEspera;
-    }
+	function actualizarContadores() {
+		document.getElementById('contador-entregados').textContent = entregados;
+		document.getElementById('contador-enProceso').textContent = enProceso;
+		document.getElementById('contador-enEspera').textContent = enEspera;
+	}
 
-    actualizarContadores();
+	actualizarContadores();
 
-    // Solo guarda en la base de datos cuando pasa de "en proceso" a "entregado"
-    function procesarCuadros() {
-        if (enEspera > 0) {
-            enEspera--;
-            enProceso++;
-        } else if (enProceso > 0) {
-            enProceso--;
-            entregados++;
-            const nombre = localStorage.getItem('ultimoNombrePintura');
-            if (nombre) {
-                agregarPinturaEntregada(nombre); // Solo aquí se guarda en la base de datos
-                renderizarTablaPinturas();
-                localStorage.removeItem('ultimoNombrePintura');
-            }
-        }
+	// Solo guarda en la base de datos cuando pasa de "en proceso" a "entregado"
+	function procesarCuadros() {
+		if (enEspera > 0) {
+			enEspera--;
+			enProceso++;
+		} else if (enProceso > 0) {
+			enProceso--;
+			entregados++;
+			const nombre = localStorage.getItem('ultimoNombrePintura');
+			if (nombre) {
+				agregarPinturaEntregada(nombre); // Solo aquí se guarda en la base de datos
+				renderizarTablaPinturas();
+				localStorage.removeItem('ultimoNombrePintura');
+			}
+		}
 
-        localStorage.setItem('contadorEnEspera', enEspera);
-        localStorage.setItem('contadorEnProceso', enProceso);
-        localStorage.setItem('contadorEntregados', entregados);
-        actualizarContadores();
-    }
+		localStorage.setItem('contadorEnEspera', enEspera);
+		localStorage.setItem('contadorEnProceso', enProceso);
+		localStorage.setItem('contadorEntregados', entregados);
+		actualizarContadores();
+	}
 
-    setInterval(procesarCuadros, 60000);
+	setInterval(procesarCuadros, 60000);
 
-    // En el submit, solo actualiza los contadores y guarda el nombre en localStorage
-    const formulario = document.querySelector('#encarga-tu-cuadro form');
-    if (formulario) {
-        formulario.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nombreCuadro = document.getElementById('nombre_cuadro').value.trim();
-            if (nombreCuadro) {
-                localStorage.setItem('ultimoNombrePintura', nombreCuadro);
-                enEspera++;
-                localStorage.setItem('contadorEnEspera', enEspera);
-                actualizarContadores();
-            }
-            formulario.reset();
-            formulario.querySelectorAll('input, textarea').forEach(f => f.classList.remove('notEmpty'));
-        });
-    }
+	// En el submit, solo actualiza los contadores y guarda el nombre en localStorage
+	const formulario = document.querySelector('#encarga-tu-cuadro form');
+	if (formulario) {
+		formulario.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Obtén los valores del formulario
+			const nombre = formulario.nombre.value;
+			const correo = formulario.correo.value;
+			const telefono = formulario.telefono.value;
+			const tipoCuadro = formulario['tipo-cuadro'].value;
+
+			try {
+				await addDoc(collection(db, 'encargos'), {
+					nombre,
+					correo,
+					telefono,
+					tipoCuadro,
+					fecha: new Date()
+				});
+				alert('¡Tu encargo ha sido enviado con éxito!');
+				formulario.reset();
+				renderizarTablaEncargos();
+			} catch (error) {
+				alert('Ocurrió un error al enviar tu encargo.');
+				console.error(error);
+			}
+		});
+	}
 });
 
 // jQuery y plugins solo si están disponibles

@@ -94,3 +94,72 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Tabla de encargos personalizada y responsiva */
+.tabla-encargos-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+#tabla-encargos {
+  margin: 0 auto;
+  min-width: 350px;
+  max-width: 700px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(80, 80, 200, 0.10);
+  overflow: hidden;
+}
+
+#tabla-encargos th, #tabla-encargos td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#tabla-encargos th {
+  background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid #e5e7eb !important;
+  letter-spacing: 0.5px;
+}
+
+#tabla-encargos tbody tr:nth-child(odd) {
+  background: #f3f4f6 !important;
+}
+
+#tabla-encargos tbody tr:nth-child(even) {
+  background: #e0e7ff !important;
+}
+
+#tabla-encargos tbody tr:hover {
+  background: #a5b4fc !important;
+  transition: background 0.2s;
+}
+
+#tabla-encargos td {
+  color: #1e293b !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  font-weight: 500;
+}
+
+#tabla-encargos tr:last-child td {
+  border-bottom: none !important;
+}
+
+@media (max-width: 700px) {
+  #tabla-encargos {
+    min-width: 300px;
+    font-size: 0.95em;
+  }
+}

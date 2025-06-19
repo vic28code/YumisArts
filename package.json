@@ -12,6 +12,10 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "firebase": "^11.9.1"
+    "firebase": "^11.9.1",
+    "jquery": "^3.7.1",
+    "jquery.easing": "^1.4.1",
+    "magnific-popup": "^1.2.0",
+    "swiper": "^11.2.8"
   }
 }
