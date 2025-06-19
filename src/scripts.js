@@ -2,7 +2,6 @@
    Description: Custom JS file
 */
 
-import Swiper from 'swiper';
 import { db, collection, addDoc, agregarPinturaEntregada, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
 
 // Función para renderizar la tabla de pinturas entregadas
