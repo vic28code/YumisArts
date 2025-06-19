@@ -1,10 +1,6 @@
 /* Template: Pavo Mobile App Website Tailwind CSS HTML Template
    Description: Custom JS file
 */
-import $ from 'jquery';
-window.$ = $;
-window.jQuery = $;
-
 
 import Swiper from 'swiper';
 import { db, collection, addDoc, agregarPinturaEntregada, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
