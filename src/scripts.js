@@ -106,6 +106,34 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	}
+
+	// Inicializar Swiper solo si está disponible globalmente (por CDN)
+	if (window.Swiper) {
+		new window.Swiper('.card-slider', {
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			},
+			autoplay: {
+				delay: 4000,
+				disableOnInteraction: false
+			},
+			loop: true,
+			slidesPerView: 3,
+			spaceBetween: 70,
+			breakpoints: {
+				767: {
+					slidesPerView: 1
+				},
+				1023: {
+					slidesPerView: 2,
+					spaceBetween: 40
+				}
+			}
+		});
+	} else {
+		console.warn('Swiper no está disponible en window. Asegúrate de que el CDN se haya cargado correctamente.');
+	}
 });
 
 // jQuery y plugins solo si están disponibles
@@ -162,32 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			midClick: true,
 			removalDelay: 300,
 			mainClass: 'my-mfp-slide-bottom'
-		});
-	}
-
-	/* Card Slider - Swiper */
-	if (typeof Swiper !== 'undefined') {
-		var cardSlider = new Swiper('.card-slider', {
-			autoplay: {
-				delay: 4000,
-				disableOnInteraction: false
-			},
-			loop: true,
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev'
-			},
-			slidesPerView: 3,
-			spaceBetween: 70,
-			breakpoints: {
-				767: {
-					slidesPerView: 1
-				},
-				1023: {
-					slidesPerView: 2,
-					spaceBetween: 40
-				}
-			}
 		});
 	}
 
