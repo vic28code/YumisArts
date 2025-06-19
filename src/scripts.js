@@ -2,7 +2,7 @@
    Description: Custom JS file
 */
 
-import { db, collection, addDoc, agregarPinturaEntregada, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
+import { db, collection, addDoc, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
 
 // Función para renderizar la tabla de pinturas entregadas
 async function renderizarTablaPinturas() {
@@ -41,43 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderizarTablaPinturas();
 	renderizarTablaEncargos();
 
-	let entregados = parseInt(localStorage.getItem('contadorEntregados')) || 0;
-	let enProceso = parseInt(localStorage.getItem('contadorEnProceso')) || 0;
-	let enEspera = parseInt(localStorage.getItem('contadorEnEspera')) || 0;
-
-	function actualizarContadores() {
-		document.getElementById('contador-entregados').textContent = entregados;
-		document.getElementById('contador-enProceso').textContent = enProceso;
-		document.getElementById('contador-enEspera').textContent = enEspera;
-	}
-
-	actualizarContadores();
-
-	// Solo guarda en la base de datos cuando pasa de "en proceso" a "entregado"
-	function procesarCuadros() {
-		if (enEspera > 0) {
-			enEspera--;
-			enProceso++;
-		} else if (enProceso > 0) {
-			enProceso--;
-			entregados++;
-			const nombre = localStorage.getItem('ultimoNombrePintura');
-			if (nombre) {
-				agregarPinturaEntregada(nombre); // Solo aquí se guarda en la base de datos
-				renderizarTablaPinturas();
-				localStorage.removeItem('ultimoNombrePintura');
-			}
-		}
-
-		localStorage.setItem('contadorEnEspera', enEspera);
-		localStorage.setItem('contadorEnProceso', enProceso);
-		localStorage.setItem('contadorEntregados', entregados);
-		actualizarContadores();
-	}
-
-	setInterval(procesarCuadros, 60000);
-
-	// En el submit, solo actualiza los contadores y guarda el nombre en localStorage
+	// En el submit, solo guarda el encargo y actualiza la tabla
 	const formulario = document.querySelector('#encarga-tu-cuadro form');
 	if (formulario) {
 		formulario.addEventListener('submit', async (e) => {
