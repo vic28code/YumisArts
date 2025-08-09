@@ -1,72 +1,64 @@
-/* Template: Pavo Mobile App Website Tailwind CSS HTML Template
-   Description: Custom JS file
-*/
+import { crearEncargo, suscribirseUltimosEncargos } from './DataBase.js';
 
-import { db, collection, addDoc, obtenerPinturasEntregadas, obtenerUltimosEncargos } from './DataBase.js';
+const tbody = document.querySelector('#tabla-encargos tbody');
 
-// Función para renderizar la tabla de pinturas entregadas
-async function renderizarTablaPinturas() {
-	const lista = await obtenerPinturasEntregadas();
-	const tbody = document.querySelector('#tabla-pinturas-entregadas tbody');
-	if (tbody) {
-		tbody.innerHTML = '';
-		lista.slice(-5).forEach(nombre => {
-			const tr = document.createElement('tr');
-			tr.innerHTML = `<td>${nombre}</td>`;
-			tbody.appendChild(tr);
-		});
-	}
+// Render de UNA fila (sin repintar todo)
+function appendFila(encargo) {
+	if (!tbody) return;
+	const tr = document.createElement('tr');
+	tr.className = "odd:bg-indigo-50 even:bg-blue-50 hover:bg-indigo-100 text-center";
+
+	const tdNombre = document.createElement('td');
+	tdNombre.textContent = encargo.nombre || '-';
+
+	const tdDesc = document.createElement('td');
+	tdDesc.textContent = encargo.tipoCuadro || '-';
+
+	const tdFecha = document.createElement('td');
+	tdFecha.textContent = encargo.fecha
+		? encargo.fecha.toLocaleDateString() + ' ' + encargo.fecha.toLocaleTimeString()
+		: '-';
+
+	tr.appendChild(tdNombre);
+	tr.appendChild(tdDesc);
+	tr.appendChild(tdFecha);
+	tbody.appendChild(tr);
 }
 
-// Función para renderizar la tabla de encargos
-async function renderizarTablaEncargos() {
-	const lista = await obtenerUltimosEncargos();
-	const tbody = document.querySelector('#tabla-encargos tbody');
-	if (tbody) {
-		tbody.innerHTML = '';
-		lista.forEach(encargo => {
-			const tr = document.createElement('tr');
-			tr.className = "odd:bg-indigo-50 even:bg-blue-50 hover:bg-indigo-100 text-center";
-			tr.innerHTML = `
-				<td>${encargo.nombre}</td>
-				<td>${encargo.tipoCuadro}</td>
-				<td>${encargo.fecha ? new Date(encargo.fecha).toLocaleString() : ''}</td>
-			`;
-			tbody.appendChild(tr);
-		});
+// Mantén como mucho 5 visibles (los más recientes)
+function recortarTabla(max = 5) {
+	const rows = Array.from(tbody.querySelectorAll('tr'));
+	if (rows.length > max) {
+		rows
+			.slice(0, rows.length - max) // elimina los más antiguos (arriba)
+			.forEach(r => r.remove());
 	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	renderizarTablaPinturas();
-	renderizarTablaEncargos();
+	// Escucha en tiempo real: cada nuevo encargo que cumpla la query se agrega
+	suscribirseUltimosEncargos((encargo) => {
+		appendFila(encargo);
+		recortarTabla(5);
+	});
 
-	// En el submit, solo guarda el encargo y actualiza la tabla
+	// Submit del formulario
 	const formulario = document.querySelector('#encarga-tu-cuadro form');
 	if (formulario) {
 		formulario.addEventListener('submit', async (e) => {
 			e.preventDefault();
-
-			// Obtén los valores del formulario
-			const nombre = formulario.nombre.value;
-			const correo = formulario.correo.value;
-			const telefono = formulario.telefono.value;
-			const tipoCuadro = formulario['tipo-cuadro'].value;
-
+			const nombre = formulario.nombre.value.trim();
+			const correo = formulario.correo.value.trim();
+			const telefono = formulario.telefono.value.trim();
+			const tipoCuadro = formulario['tipo-cuadro'].value.trim();
 			try {
-				await addDoc(collection(db, 'encargos'), {
-					nombre,
-					correo,
-					telefono,
-					tipoCuadro,
-					fecha: new Date()
-				});
-				alert('¡Tu encargo ha sido enviado con éxito!');
+				await crearEncargo({ nombre, correo, celular: telefono, tipoCuadro });
 				formulario.reset();
-				renderizarTablaEncargos();
-			} catch (error) {
+				alert('¡Tu encargo ha sido enviado con éxito!');
+				// No hay que refrescar: onChildAdded insertará la fila cuando RTDB asigne el timestamp
+			} catch (err) {
+				console.error(err);
 				alert('Ocurrió un error al enviar tu encargo.');
-				console.error(error);
 			}
 		});
 	}
@@ -99,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.warn('Swiper no está disponible en window. Asegúrate de que el CDN se haya cargado correctamente.');
 	}
 });
+
 
 // jQuery y plugins solo si están disponibles
 (function ($) {
